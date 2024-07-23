@@ -1,0 +1,45 @@
+<div class="feedback-form">
+    <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="name">Name:</label>
+        <input id="name" formControlName="name" required>
+        <div *ngIf="feedbackForm.get('name')?.invalid && feedbackForm.get('name')?.touched">
+          <div class="validator" *ngIf="feedbackForm.get('name')?.errors?.['required']">Name is required.</div>
+        </div>
+      </div>
+      
+      <div>
+        <label for="email">Email:</label>
+        <input id="email" formControlName="email" required>
+        <div *ngIf="feedbackForm.get('email')?.invalid && feedbackForm.get('email')?.touched">
+          <div class="validator" *ngIf="feedbackForm.get('email')?.errors?.['required']">Email is required.</div>
+          <div class="validator" *ngIf="feedbackForm.get('email')?.errors?.['email']">Enter a valid email.</div>
+        </div>
+      </div>
+      
+      <div>
+        <label for="product">Product:</label>
+        <input id="product" formControlName="product" required>
+        <div *ngIf="feedbackForm.get('product')?.invalid && feedbackForm.get('product')?.touched">
+          <div class="validator" *ngIf="feedbackForm.get('product')?.errors?.['required']">Product is required.</div>
+        </div>
+      </div>
+      
+      <div>
+        <label for="rating">Rating (1-5):</label>
+        <input id="rating" type="number" formControlName="rating" required>
+        <div *ngIf="feedbackForm.get('rating')?.invalid && feedbackForm.get('rating')?.touched">
+          <div class="validator" *ngIf="feedbackForm.get('rating')?.errors?.['required']">Rating is required.</div>
+          <div class="validator" *ngIf="feedbackForm.get('rating')?.errors?.['min']">Rating must be at least 1.</div>
+          <div class="validator" *ngIf="feedbackForm.get('rating')?.errors?.['max']">Rating cannot be more than 5.</div>
+        </div>
+      </div>
+      
+      <div>
+        <label for="comments">Comments:</label>
+        <textarea id="comments" formControlName="comments"></textarea>
+      </div>
+      
+      <button type="submit" [disabled]="feedbackForm.invalid">Submit</button>
+    </form>
+</div>
